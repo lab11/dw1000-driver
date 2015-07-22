@@ -1569,7 +1569,7 @@ uint32 _dwt_otpprogword32(uint32 data, uint16 address)
 
     if((rd_buf[0] & 0x02) != 0x02)
     {
-        printf("OTP PROG 32: ERROR VPP NOT OK, programming will fail. Are MR/MRA/MRB set?\n");
+        //printf("OTP PROG 32: ERROR VPP NOT OK, programming will fail. Are MR/MRA/MRB set?\n");
         return DWT_ERROR;
     }
 
