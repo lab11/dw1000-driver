@@ -679,8 +679,8 @@ uint16 dwt_readantennadelay(uint8 prf)
  *                         standard PHR mode allows up to 127 bytes
  *                         if > 127 is programmed, DWT_PHRMODE_EXT needs to be set in the phrMode configuration
  *                         see dwt_configure function
- * @param txFrameBytes   - Pointer to the user’s buffer containing the data to send.
- * @param txBufferOffset - This specifies an offset in the DW1000’s TX Buffer at which to start writing data.
+ * @param txFrameBytes   - Pointer to the user's buffer containing the data to send.
+ * @param txBufferOffset - This specifies an offset in the DW1000's TX Buffer at which to start writing data.
  *
  * output parameters
  *
