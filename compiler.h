@@ -44,7 +44,9 @@ extern "C" {
 #define Sleep(x)            usleep((x*1000))
 #define __align4            __attribute__((aligned (4)))
 #define __weak              __attribute__((weak))
+#ifndef __always_inline
 #define __always_inline     __attribute__((always_inline))
+#endif
 #endif
 
 #ifdef __ICCARM__
