@@ -883,9 +883,9 @@ extern "C" {
 #define RF_TXCTRL_LEN			(4)
 #define	RF_TXCTRL_TXMTUNE_MASK	0x000001E0UL	/* Transmit mixer tuning register */
 #define	RF_TXCTRL_TXTXMQ_MASK	0x00000E00UL	/* Transmit mixer Q-factor tuning register */
-#define RF_TXCTRL_CH1			0x00005C40UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
-#define RF_TXCTRL_CH2			0x00045CA0UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
-#define RF_TXCTRL_CH3			0x00086CC0UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
+#define RF_TXCTRL_CH1			0x000C6CC0UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
+#define RF_TXCTRL_CH2			1079968UL//0x00045CA0UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
+#define RF_TXCTRL_CH3			0x00147DE0UL//0x00086CC0UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
 #define RF_TXCTRL_CH4			0x00045C80UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
 #define RF_TXCTRL_CH5			0x001E3FE0UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */
 #define RF_TXCTRL_CH7			0x001E7DE0UL	/* 32-bit value to program to Sub-Register 0x28:0C – RF_TXCTRL */

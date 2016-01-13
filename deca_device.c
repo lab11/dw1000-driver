@@ -376,6 +376,9 @@ uint32 dwt_getotptxpower(uint8 prf, uint8 chan)
     return dw1000local.txPowCfg[(prf - DWT_PRF_16M) + (chan_idx[chan] * 2)];
 }
 
+extern uint8_t pgDelay[8];
+extern uint32_t txPower[8];
+
 int dwt_setchannel(dwt_config_t *config, uint8 use_otpconfigvalues)
 {
     uint8 nsSfd_result  = 0;
@@ -383,8 +386,14 @@ int dwt_setchannel(dwt_config_t *config, uint8 use_otpconfigvalues)
     uint8 chan = config->chan ;
     uint32 regval ;
     uint8 bw = ((chan == 4) || (chan == 7)) ? 1 : 0 ; //select wide or narrow band
+    dwt_txconfig_t local_tx_config;
 
     dw1000local.chan = config->chan ;
+
+    // Configure TX power based on the channel used
+    local_tx_config.PGdly = pgDelay[chan];
+    local_tx_config.power = txPower[chan];
+    dwt_configuretxrf(&local_tx_config);
 
 //    config RF pll (for a given channel)
 //    configure PLL2/RF PLL block CFG
