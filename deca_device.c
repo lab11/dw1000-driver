@@ -2408,6 +2408,17 @@ void dwt_isr(void) // assume interrupt can supply context
 		else //no LDE_DONE ? 
 		{
 			//printf("NO LDE done or LDE error\n");
+			if(!(dw1000local.sysCFGreg & SYS_CFG_RXAUTR))
+                        {
+                                dwt_forcetrxoff();
+                        }
+                        dwt_rxreset();  // Reset the RX
+                        dw1000local.wait4resp = 0;
+                        dw1000local.cdata.event = DWT_SIG_RX_ERROR  ;
+                        if(dw1000local.dwt_rxcallback != NULL)
+                        {
+                                dw1000local.dwt_rxcallback(&dw1000local.cdata);
+                        }
 		}
     } // end if CRC is good
     else

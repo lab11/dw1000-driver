@@ -586,13 +586,13 @@ extern "C" {
 #define AGC_TUNE2_OFFSET		(0x0C)
 #define AGC_TUNE2_LEN			(4)
 #define AGC_TUNE2_MASK			0xFFFFFFFFUL
-#define AGC_TUNE2_VAL			0X2502A907UL
+#define AGC_TUNE2_VAL			0X2503B90FUL
 /* offset from AGC_CTRL_ID in bytes */
 /* Please take care not to write other values to this register as doing so may cause the DW1000 to malfunction */
 #define AGC_TUNE3_OFFSET		(0x12)
 #define AGC_TUNE3_LEN			(2)
 #define AGC_TUNE3_MASK			0xFFFF
-#define AGC_TUNE3_VAL			0X0055
+#define AGC_TUNE3_VAL			0X0035
 /* offset from AGC_CTRL_ID in bytes */
 #define AGC_STAT1_OFFSET		(0x1E)
 #define AGC_STAT1_LEN			(3)
