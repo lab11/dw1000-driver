@@ -2213,6 +2213,7 @@ void dwt_isr(void) // assume interrupt can supply context
 {
     uint32  status = 0;
     uint32  clear = 0; // will clear any events seen
+    uint8 hsrb = 0x01 ;
 
 #if (DEBUGx==1)
     uint32 status1 = 0;
@@ -2294,6 +2295,9 @@ void dwt_isr(void) // assume interrupt can supply context
 				//will be corrupted with the latest frame (seq. num = x + 2) data, both the host and IC are pointing to buffer A
 				//we are going to discard this frame - turn off transceiver and reset receiver
 				dwt_forcetrxoff();
+
+		            	//toggle the host side Receive Buffer Pointer by writing one to the register
+		            	dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
 				
 				dwt_rxreset();	
 
@@ -2357,7 +2361,6 @@ void dwt_isr(void) // assume interrupt can supply context
 			else //double buffer
 	        {
 				uint8  buff ;
-	            uint8 hsrb = 0x01 ;
 
 				//need to make sure that the host/IC buffer pointers are aligned before starting RX
 				//read again because the status could have changed since the interrupt was triggered
@@ -2393,6 +2396,9 @@ void dwt_isr(void) // assume interrupt can supply context
 						//the calback has completed, but the overrun has been set, before we toggled, this means two new frames have arrived (one in the other buffer) and the 2nd's PHR good set the overrun flag  
 						//due to a receiver bug, which cannot guarantee the last frame's data was not corrupted need to reset receiver and discard any new data
 					dwt_forcetrxoff();
+
+			            	//toggle the host side Receive Buffer Pointer by writing one to the register
+			            	dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
 
 					dwt_rxreset();	
 
