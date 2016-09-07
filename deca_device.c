@@ -508,7 +508,7 @@ int dwt_configure(dwt_config_t *config, uint8 use_otpconfigvalues)
 //    configure PLL2/RF PLL block CFG
     dwt_writetodevice(FS_CTRL_ID, FS_PLLCFG_OFFSET, 5, &pll2_config[chan_idx[chan]][0]);    //alliv rewrite to 32bit + 8 bit
     //configure PLL2/RF PLL block CAL
-    dwt_writetodevice(FS_CTRL_ID, FS_XTALT_OFFSET, 1, &pll2calcfg);
+    //dwt_writetodevice(FS_CTRL_ID, FS_XTALT_OFFSET, 1, &pll2calcfg);
 
     // Configure RF RX blocks (for specified channel/badwidth)
     dwt_writetodevice(RF_CONF_ID, RF_RXCTRLH_OFFSET, 1, &rx_config[bw]);
