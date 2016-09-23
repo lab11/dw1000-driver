@@ -2297,7 +2297,8 @@ void dwt_isr(void) // assume interrupt can supply context
 				dwt_forcetrxoff();
 
 		            	//toggle the host side Receive Buffer Pointer by writing one to the register
-		            	dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
+				dwt_syncrxbufptrs();
+		            	//dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
 				
 				dwt_rxreset();	
 
@@ -2389,7 +2390,8 @@ void dwt_isr(void) // assume interrupt can supply context
 				if(dwt_checkoverrun() == 0)
 				{
 	            	//toggle the host side Receive Buffer Pointer by writing one to the register
-	            	dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
+				dwt_syncrxbufptrs();
+	            	//dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
 	        	}
 				else
 				{
@@ -2398,7 +2400,8 @@ void dwt_isr(void) // assume interrupt can supply context
 					dwt_forcetrxoff();
 
 			            	//toggle the host side Receive Buffer Pointer by writing one to the register
-			            	dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
+					dwt_syncrxbufptrs();
+			            	//dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
 
 					dwt_rxreset();	
 
