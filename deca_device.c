@@ -75,6 +75,7 @@ typedef struct
     uint32      states[3] ;         //MP workaround debug states register
     uint8       statescount ;
     uint8		wait4resp ;			//wait 4 response was set with last TX start command
+    uint8       rxreset_flag ;
     int         prfIndex ;
 
 	uint32		ldoTune ;			//low 32 bits of LDO tune value
@@ -2382,16 +2383,19 @@ void dwt_isr(void) // assume interrupt can supply context
 				}
 
 				//call the RX call-back function to process the RX event
-				if(dw1000local.dwt_rxcallback != NULL)
+				if(dw1000local.dwt_rxcallback != NULL){
+					dw1000local.rxreset_flag = 0;
 					dw1000local.dwt_rxcallback(&dw1000local.cdata);
+				}
 
 				//if overrun, then reset the reciver - RX bug, when overruns cannot guarantee the last frame's data was not corrupted 
 				//if no overrun all is good, toggle the pointer
 				if(dwt_checkoverrun() == 0)
 				{
 	            	//toggle the host side Receive Buffer Pointer by writing one to the register
-				dwt_syncrxbufptrs();
-	            	//dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
+				if(dw1000local.rxreset_flag == 0)
+	            			dwt_writetodevice(SYS_CTRL_ID, SYS_CTRL_HRBT_OFFSET, 1, &hsrb) ;       // we need to swap rx buffer status reg (write one to toggle internally)
+				//dwt_syncrxbufptrs();
 	        	}
 				else
 				{
@@ -2786,6 +2790,7 @@ void dwt_forcetrxoff(void)
 
 	//enable/restore interrupts again... 
 	decamutexoff(stat) ;
+    dw1000local.rxreset_flag = 1;
     dw1000local.wait4resp = 0;
 
 } // end deviceforcetrxoff()
@@ -3129,6 +3134,7 @@ void dwt_softreset(void)
     temp[0] |= 0xF0;
     dwt_writetodevice(PMSC_ID, 0x3, 1, &temp[0]) ;
 
+    dw1000local.rxreset_flag = 1;
     dw1000local.wait4resp = 0;
 
 }
