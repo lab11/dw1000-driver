@@ -1,14 +1,13 @@
 /*! ----------------------------------------------------------------------------
- *  @file 	deca_types.h
- *  @brief 	DecaWave general type definitions
+ *  @file   deca_types.h
+ *  @brief  Decawave general type definitions
  *
  * @attention
  *
- * Copyright 2013 (c) DecaWave Ltd, Dublin, Ireland.
+ * Copyright 2013 (c) Decawave Ltd, Dublin, Ireland.
  *
  * All rights reserved.
  *
- * @author DecaWave
  */
 
 #ifndef _DECA_TYPES_H_
@@ -17,8 +16,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "compiler.h"
 
 #ifndef uint8
 #ifndef _DECA_UINT8_
@@ -62,17 +59,8 @@ typedef signed long int32;
 #endif
 #endif
 
-typedef uint64_t        uint64 ;
-
-typedef int64_t         int64 ;
-
-
-#ifndef FALSE
-#define FALSE               0
-#endif
-
-#ifndef TRUE
-#define TRUE                1
+#ifndef NULL
+#define NULL ((void *)0UL)
 #endif
 
 #ifdef __cplusplus
