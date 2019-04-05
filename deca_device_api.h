@@ -1828,6 +1828,38 @@ void decamutexoff(decaIrqStatus_t s) ;
  */
 void deca_sleep(unsigned int time_ms);
 
+
+/********************************************************************************************************************/
+/*                                                 EXTENDED API LIST                                                */
+/********************************************************************************************************************/
+
+/*! ------------------------------------------------------------------------------------------------------------------
+ * @fn _dwt_enableclocks()
+ *
+ * @brief function to enable/disable clocks to particular digital blocks/system
+ *
+ * input parameters
+ * @param clocks - set of clocks to enable/disable
+ *
+ * output parameters none
+ *
+ * no return value
+ */
+void _dwt_enableclocks(int clocks);
+
+/*! ------------------------------------------------------------------------------------------------------------------
+ * @fn _dwt_disablesequencing()
+ *
+ * @brief This function disables the TX blocks sequencing, it disables PMSC control of RF blocks, system clock is also set to XTAL
+ *
+ * input parameters none
+ *
+ * output parameters none
+ *
+ * no return value
+ */
+void _dwt_disablesequencing(void);
+
 #ifdef __cplusplus
 }
 #endif
