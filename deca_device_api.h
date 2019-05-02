@@ -1832,16 +1832,20 @@ void decamutexoff(decaIrqStatus_t s) ;
  */
 void deca_sleep(unsigned int time_ms);
 
+
+/****************************************************************************************************************************************************
+ *
+ * Add direct access to internal functions
+ *
+ ****************************************************************************************************************************************************/
+
+
+void dwt_disablesequencing();
+void dwt_enableclocks(int clocks);
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* _DECA_DEVICE_API_H_ */
-
-/*! ------------------------------------------------------------------------------------------------------------------
- * ADD public access to functions
- */
-
-void dwt_disablesequencing();
-void dwt_enableclocks(int clocks);
 
