@@ -132,6 +132,7 @@ typedef signed long int32;
 #define DWT_FF_RSVD_EN              0x040           // reserved frame types allowed
 
 //DW1000 interrupt events
+#define DWT_INT_PLOCK           0x00000001          // clock PLL lock
 #define DWT_INT_TFRS            0x00000080          // frame sent
 #define DWT_INT_LDED            0x00000400          // micro-code has finished execution
 #define DWT_INT_RFCG            0x00004000          // frame received with good CRC
@@ -141,23 +142,26 @@ typedef signed long int32;
 #define DWT_INT_RFTO            0x00020000          // frame wait timeout
 #define DWT_INT_RXOVRR          0x00100000          // receiver overrun
 #define DWT_INT_RXPTO           0x00200000          // preamble detect timeout
+#define DWT_INT_SLP2INIT        0x00800000          // transition from sleep to init
 #define DWT_INT_SFDT            0x04000000          // SFD timeout
 #define DWT_INT_ARFE            0x20000000          // frame rejected (due to frame filtering configuration)
 
 
 //DW1000 SLEEP and WAKEUP configuration parameters
-#define DWT_PRESRV_SLEEP 0x0100                      // PRES_SLEEP - on wakeup preserve sleep bit
-#define DWT_LOADOPSET    0x0080                      // ONW_L64P - on wakeup load operating parameter set for 64 PSR
-#define DWT_CONFIG       0x0040                      // ONW_LDC - on wakeup restore (load) the saved configurations (from AON array into HIF)
-#define DWT_LOADEUI      0x0008                      // ONW_LEUI - on wakeup load EUI
-#define DWT_RX_EN        0x0002                      // ONW_RX - on wakeup activate reception
-#define DWT_TANDV        0x0001                      // ONW_RADC - on wakeup run ADC to sample temperature and voltage sensor values
+#define DWT_LOAD_LDO     0x1000                     // ONW_LLDO - load the LDOTUNE value from OTP (useful if storing config data in OTP) (Note: Should be set automatically when used)
+#define DWT_LOAD_LDE     0x0800                     // ONW_LLDE - load LDE microcode for correct time-stamping and RSSI values (Note: Should be set automatically when used)
+#define DWT_PRESRV_SLEEP 0x0100                     // PRES_SLEEP - on wakeup preserve sleep bit
+#define DWT_LOADOPSET    0x0080                     // ONW_L64P - on wakeup load operating parameter set for 64 PSR
+#define DWT_CONFIG       0x0040                     // ONW_LDC  - on wakeup restore (load) the saved configurations (from AON array into HIF)
+#define DWT_LOADEUI      0x0008                     // ONW_LEUI - on wakeup load EUI
+#define DWT_RX_EN        0x0002                     // ONW_RX   - on wakeup activate reception
+#define DWT_TANDV        0x0001                     // ONW_RADC - on wakeup run ADC to sample temperature and voltage sensor values
 
-#define DWT_XTAL_EN      0x10                       // keep XTAL running during sleep
-#define DWT_WAKE_SLPCNT  0x8                        // wake up after sleep count
-#define DWT_WAKE_CS      0x4                        // wake up on chip select
-#define DWT_WAKE_WK      0x2                        // wake up on WAKEUP PIN
-#define DWT_SLP_EN       0x1                        // enable sleep/deep sleep functionality
+#define DWT_XTAL_EN      0x10                       // LPDIV_EN - keep XTAL running during sleep
+#define DWT_WAKE_SLPCNT  0x8                        // WAKE_CNT - wake up after sleep count
+#define DWT_WAKE_CS      0x4                        // WAKE_SPI - wake up on chip select
+#define DWT_WAKE_WK      0x2                        // WAKE_PIN - wake up on WAKEUP PIN
+#define DWT_SLP_EN       0x1                        // SLEEP_EN - enable sleep/deep sleep functionality
 
 //DW1000 INIT configuration parameters
 #define DWT_LOADUCODE     0x1
@@ -1828,42 +1832,16 @@ void decamutexoff(decaIrqStatus_t s) ;
  */
 void deca_sleep(unsigned int time_ms);
 
-
-/********************************************************************************************************************/
-/*                                                 EXTENDED API LIST                                                */
-/********************************************************************************************************************/
-
-/*! ------------------------------------------------------------------------------------------------------------------
- * @fn _dwt_enableclocks()
- *
- * @brief function to enable/disable clocks to particular digital blocks/system
- *
- * input parameters
- * @param clocks - set of clocks to enable/disable
- *
- * output parameters none
- *
- * no return value
- */
-void _dwt_enableclocks(int clocks);
-
-/*! ------------------------------------------------------------------------------------------------------------------
- * @fn _dwt_disablesequencing()
- *
- * @brief This function disables the TX blocks sequencing, it disables PMSC control of RF blocks, system clock is also set to XTAL
- *
- * input parameters none
- *
- * output parameters none
- *
- * no return value
- */
-void _dwt_disablesequencing(void);
-
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* _DECA_DEVICE_API_H_ */
 
+/*! ------------------------------------------------------------------------------------------------------------------
+ * ADD public access to functions
+ */
+
+void dwt_disablesequencing();
+void dwt_enableclocks(int clocks);
 
