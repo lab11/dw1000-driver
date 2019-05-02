@@ -132,7 +132,7 @@ typedef signed long int32;
 #define DWT_FF_RSVD_EN              0x040           // reserved frame types allowed
 
 //DW1000 interrupt events
-#define DWT_INT_PLOCK           0x00000001          // clock PLL lock
+#define DWT_INT_PLOCK           0x00000002          // clock PLL lock
 #define DWT_INT_TFRS            0x00000080          // frame sent
 #define DWT_INT_LDED            0x00000400          // micro-code has finished execution
 #define DWT_INT_RFCG            0x00004000          // frame received with good CRC
