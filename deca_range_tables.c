@@ -4,11 +4,10 @@
  *
  * @attention
  *
- * Copyright 2013 (c) DecaWave Ltd, Dublin, Ireland.
+ * Copyright 2015 (c) DecaWave Ltd, Dublin, Ireland.
  *
  * All rights reserved.
  *
- * @author DecaWave
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -625,10 +624,10 @@ const uint8 range25cm64PRFwb[2][NUM_64M_OFFSETWB] =
  *
  * Description: This function is used to return the range bias correction need for TWR with DW1000 units.
  *
- * input parameters:	
+ * input parameters:
  * @param chan  - specifies the operating channel (e.g. 1, 2, 3, 4, 5, 6 or 7) 
  * @param range - the calculated distance before correction
- * @param prf	- this is the PRF e.g. DWT_PRF_16M or DWT_PRF_64M
+ * @param prf   - this is the PRF e.g. DWT_PRF_16M or DWT_PRF_64M
  *
  * output parameters
  *

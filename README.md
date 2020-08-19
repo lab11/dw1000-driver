@@ -1,2 +1,4 @@
-# dw1000-driver
-Closed-Source Driver Code from DecaWave for the ScenSor (DW1000) UWB Transceiver
+DW1000 Driver
+-------------
+
+Modified driver code from DecaWave for the DW1000 UWB Transceiver

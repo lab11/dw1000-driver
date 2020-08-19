@@ -68,6 +68,7 @@ const uint8 rx_config[NUM_BW] =
 const agc_cfg_struct agc_config =
 {
     AGC_TUNE2_VAL,
+    AGC_TUNE3_VAL,
     { AGC_TUNE1_16M , AGC_TUNE1_64M }  //adc target
 };
 
@@ -146,13 +147,3 @@ const uint16 lde_replicaCoeff[PCODES] =
     LDE_REPC_PCODE_23,
     LDE_REPC_PCODE_24
 };
-
-const double txpwr_compensation[NUM_CH] = {
-    0.0,
-    0.035,
-    0.0,
-    0.0,
-    0.065,
-    0.0
-};
-
